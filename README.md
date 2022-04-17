@@ -2,9 +2,11 @@
 
 <img src="https://github.com/alicek106/aws-terraform-kubernetes/blob/master/pictures/kube.png?raw=true">
 
-This repository is copied from opencredo/k8s-terraform-ansible-sample, but it didn't consider kubespray.
+This repository is copied from opencredo/k8s-terraform-ansible-sample and alicek106/aws-terraform-kubernetes
 
 > https://github.com/opencredo/k8s-terraform-ansible-sample
+and
+> https://github.com/alicek106/aws-terraform-kubernetes
 
 Also, This repository will create 3 workers, 3 master, and 3 etcd Kubernetes cluster by default. You can adjust the number of each node by changing below **Variables**. 
 
