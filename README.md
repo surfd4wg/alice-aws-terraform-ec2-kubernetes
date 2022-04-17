@@ -24,7 +24,7 @@ Also, This repository will create 3 workers, 3 master, and 3 etcd Kubernetes clu
 2. Install required packages.
 
    ```
-   $ apt update && apt install git python python-pip unzip wget vim -y && \
+   $ apt update && apt install git python3 python3-pip unzip wget vim -y && \
        git clone https://github.com/surfd4wg/alice-aws-terraform-ec2-kubernetes.git && \
        cd alice-aws-terraform-ec2-kubernetes/terraform
    ```
