@@ -30,7 +30,7 @@ variable "number_of_worker" {
 
 variable "cluster_id_tag" {
   description = "Cluster ID tag for kubespray"
-  default     = "alice"
+  default     = "kr8g"
 }
 
 variable "cluster_id_value" {
@@ -77,7 +77,7 @@ variable "elb_name" {
 }
 
 variable "owner" {
-  default = "alicek106"
+  default = "kr8gums"
 }
 
 variable "ansibleFilter" {
@@ -87,11 +87,11 @@ variable "ansibleFilter" {
 
 # Networking setup
 variable "region" {
-  default = "ap-northeast-2"
+  default = "us-east-1"
 }
 
 variable "zone" {
-  default = "ap-northeast-2a"
+  default = "us-east-1a"
 }
 
 ### VARIABLES BELOW MUST NOT BE CHANGED ###

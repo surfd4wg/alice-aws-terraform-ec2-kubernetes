@@ -1,6 +1,6 @@
 ## Kubernetes Setup using AWS and Terraform
 
-<img src="https://github.com/alicek106/aws-terraform-kubernetes/blob/master/pictures/kube.png?raw=true">
+<img src="https://github.com/surfd4wg/alice-aws-terraform-ce2-kubernetes/blob/master/pictures/kube.png?raw=true">
 
 This repository is copied from opencredo/k8s-terraform-ansible-sample and alicek106/aws-terraform-kubernetes
 
