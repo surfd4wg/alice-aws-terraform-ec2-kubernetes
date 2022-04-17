@@ -7,15 +7,15 @@ resource "aws_instance" "controller" {
   ami           = lookup(var.amis, var.region)
   instance_type = var.controller_instance_type
 
-  iam_instance_profile = aws_iam_instance_profile.kubernetes.id
+  iam_instance_profile = aws_iam_instance_profile.ec2_kubernetes.id
 
-  subnet_id                   = aws_subnet.kubernetes.id
+  subnet_id                   = aws_subnet.ec2_kubernetes.id
   private_ip                  = cidrhost(var.vpc_cidr, 20 + count.index)
   associate_public_ip_address = true  # Instances have public, dynamic IP
   source_dest_check           = false # TODO Required??
 
   availability_zone      = var.zone
-  vpc_security_group_ids = ["${aws_security_group.kubernetes.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ec2_kubernetes.id}"]
   key_name               = var.default_keypair_name
   tags = merge(
     local.common_tags,
@@ -34,15 +34,15 @@ resource "aws_instance" "controller_etcd" {
   ami           = lookup(var.amis, var.region)
   instance_type = var.controller_instance_type
 
-  iam_instance_profile = aws_iam_instance_profile.kubernetes.id
+  iam_instance_profile = aws_iam_instance_profile.ec2_kubernetes.id
 
-  subnet_id                   = aws_subnet.kubernetes.id
+  subnet_id                   = aws_subnet.ec2_kubernetes.id
   private_ip                  = cidrhost(var.vpc_cidr, 40 + count.index)
   associate_public_ip_address = true  # Instances have public, dynamic IP
   source_dest_check           = false # TODO Required??
 
   availability_zone      = var.zone
-  vpc_security_group_ids = ["${aws_security_group.kubernetes.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ec2_kubernetes.id}"]
   key_name               = var.default_keypair_name
 
   tags = merge(
@@ -61,13 +61,13 @@ resource "aws_instance" "controller_etcd" {
 ## Kubernetes API Load Balancer
 ###############################
 
-resource "aws_elb" "kubernetes_api" {
+resource "aws_elb" "ec2_kubernetes_api" {
   name                      = var.elb_name
   instances                 = aws_instance.controller[*].id
-  subnets                   = ["${aws_subnet.kubernetes.id}"]
+  subnets                   = ["${aws_subnet.ec2_kubernetes.id}"]
   cross_zone_load_balancing = false
 
-  security_groups = ["${aws_security_group.kubernetes_api.id}"]
+  security_groups = ["${aws_security_group.ec2_kubernetes_api.id}"]
 
   listener {
     lb_port           = 6443
@@ -97,8 +97,8 @@ resource "aws_elb" "kubernetes_api" {
 ## Security
 ############
 
-resource "aws_security_group" "kubernetes_api" {
-  vpc_id = aws_vpc.kubernetes.id
+resource "aws_security_group" "ec2_kubernetes_api" {
+  vpc_id = aws_vpc.ec2_kubernetes.id
   name   = "kubernetes-api"
 
   # Allow inbound traffic to the port used by Kubernetes API HTTPS
@@ -131,5 +131,5 @@ resource "aws_security_group" "kubernetes_api" {
 ############
 
 output "kubernetes_api_dns_name" {
-  value = aws_elb.kubernetes_api.dns_name
+  value = aws_elb.ec2_kubernetes_api.dns_name
 }

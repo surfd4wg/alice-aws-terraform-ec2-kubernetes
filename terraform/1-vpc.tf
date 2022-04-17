@@ -2,7 +2,7 @@
 ## VPC
 ############
 
-resource "aws_vpc" "kubernetes" {
+resource "aws_vpc" "ec2_kubernetes" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
 
@@ -30,7 +30,7 @@ resource "aws_vpc_dhcp_options" "dns_resolver" {
 }
 
 resource "aws_vpc_dhcp_options_association" "dns_resolver" {
-  vpc_id          = aws_vpc.kubernetes.id
+  vpc_id          = aws_vpc.ec2_kubernetes.id
   dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
 }
 
@@ -49,8 +49,8 @@ resource "aws_key_pair" "default_keypair" {
 ############
 
 # Subnet (public)
-resource "aws_subnet" "kubernetes" {
-  vpc_id            = aws_vpc.kubernetes.id
+resource "aws_subnet" "ec2_kubernetes" {
+  vpc_id            = aws_vpc.ec2_kubernetes.id
   cidr_block        = var.vpc_cidr
   availability_zone = var.zone
 
@@ -64,7 +64,7 @@ resource "aws_subnet" "kubernetes" {
 }
 
 resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.kubernetes.id
+  vpc_id = aws_vpc.ec2_kubernetes.id
 
   tags = merge(
     local.common_tags,
@@ -79,8 +79,8 @@ resource "aws_internet_gateway" "gw" {
 ## Routing
 ############
 
-resource "aws_route_table" "kubernetes" {
-  vpc_id = aws_vpc.kubernetes.id
+resource "aws_route_table" "ec2_kubernetes" {
+  vpc_id = aws_vpc.ec2_kubernetes.id
 
   # Default route through Internet Gateway
   route {
@@ -97,9 +97,9 @@ resource "aws_route_table" "kubernetes" {
   )
 }
 
-resource "aws_route_table_association" "kubernetes" {
-  subnet_id      = aws_subnet.kubernetes.id
-  route_table_id = aws_route_table.kubernetes.id
+resource "aws_route_table_association" "ec2_kubernetes" {
+  subnet_id      = aws_subnet.ec2_kubernetes.id
+  route_table_id = aws_route_table.ec2_kubernetes.id
 }
 
 
@@ -107,8 +107,8 @@ resource "aws_route_table_association" "kubernetes" {
 ## Security
 ############
 
-resource "aws_security_group" "kubernetes" {
-  vpc_id = aws_vpc.kubernetes.id
+resource "aws_security_group" "ec2_kubernetes" {
+  vpc_id = aws_vpc.ec2_kubernetes.id
   name   = "kubernetes"
 
   # Allow all outbound
@@ -140,7 +140,7 @@ resource "aws_security_group" "kubernetes" {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    security_groups = ["${aws_security_group.kubernetes_api.id}"]
+    security_groups = ["${aws_security_group.ec2_kubernetes_api.id}"]
   }
 
   # Allow all traffic from control host IP

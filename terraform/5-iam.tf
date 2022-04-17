@@ -4,8 +4,8 @@
 
 # The following Roles and Policy are mostly for future use
 
-resource "aws_iam_role" "kubernetes" {
-  name               = "kubernetes"
+resource "aws_iam_role" "ec2_kubernetes" {
+  name               = "ec2_kubernetes"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -23,9 +23,9 @@ EOF
 }
 
 # Role policy
-resource "aws_iam_role_policy" "kubernetes" {
-  name   = "kubernetes"
-  role   = aws_iam_role.kubernetes.id
+resource "aws_iam_role_policy" "ec2_kubernetes" {
+  name   = "ec2_kubernetes"
+  role   = aws_iam_role.ec2_kubernetes.id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -57,7 +57,7 @@ EOF
 
 
 # IAM Instance Profile for Controller
-resource "aws_iam_instance_profile" "kubernetes" {
-  name = "kubernetes"
-  role = aws_iam_role.kubernetes.name
+resource "aws_iam_instance_profile" "ec2_kubernetes" {
+  name = "ec2_kubernetes"
+  role = aws_iam_role.ec2_kubernetes.name
 }

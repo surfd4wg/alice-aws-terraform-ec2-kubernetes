@@ -1,0 +1,27 @@
+2022-04-17T11:06:05.797-0600 [INFO]  Terraform version: 1.1.8
+2022-04-17T11:06:05.797-0600 [INFO]  Go runtime version: go1.17.2
+2022-04-17T11:06:05.797-0600 [INFO]  CLI args: []string{"terraform", "destroy", "-auto-approve"}
+2022-04-17T11:06:05.798-0600 [DEBUG] Attempting to open CLI config file: /home/parallels/.terraformrc
+2022-04-17T11:06:05.798-0600 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2022-04-17T11:06:05.798-0600 [DEBUG] ignoring non-existing provider search directory terraform.d/plugins
+2022-04-17T11:06:05.799-0600 [DEBUG] ignoring non-existing provider search directory /home/parallels/.terraform.d/plugins
+2022-04-17T11:06:05.799-0600 [DEBUG] ignoring non-existing provider search directory /home/parallels/.local/share/terraform/plugins
+2022-04-17T11:06:05.799-0600 [DEBUG] ignoring non-existing provider search directory /usr/share/ubuntu/terraform/plugins
+2022-04-17T11:06:05.799-0600 [DEBUG] ignoring non-existing provider search directory /usr/local/share/terraform/plugins
+2022-04-17T11:06:05.799-0600 [DEBUG] ignoring non-existing provider search directory /usr/share/terraform/plugins
+2022-04-17T11:06:05.799-0600 [DEBUG] ignoring non-existing provider search directory /var/lib/snapd/desktop/terraform/plugins
+2022-04-17T11:06:05.799-0600 [INFO]  CLI command args: []string{"destroy", "-auto-approve"}
+2022-04-17T11:06:05.802-0600 [DEBUG] New state was assigned lineage "a4f5330a-8335-a894-cdc8-b080e23e8342"
+2022-04-17T11:06:05.803-0600 [DEBUG] checking for provisioner in "."
+2022-04-17T11:06:05.803-0600 [DEBUG] checking for provisioner in "/usr/local/bin"
+2022-04-17T11:06:05.804-0600 [INFO]  backend/local: starting Apply operation
+2022-04-17T11:06:05.809-0600 [DEBUG] Building and walking validate graph
+2022-04-17T11:06:05.811-0600 [DEBUG] Starting graph walk: walkValidate
+2022-04-17T11:06:05.812-0600 [INFO]  backend/local: apply calling Plan
+2022-04-17T11:06:05.812-0600 [DEBUG] Building and walking plan graph for NormalMode
+2022-04-17T11:06:05.813-0600 [DEBUG] Starting graph walk: walkPlan
+2022-04-17T11:06:05.813-0600 [DEBUG] Building and walking plan graph for DestroyMode
+2022-04-17T11:06:05.813-0600 [DEBUG] Starting graph walk: walkPlanDestroy
+2022-04-17T11:06:05.814-0600 [INFO]  backend/local: apply calling Apply
+2022-04-17T11:06:05.814-0600 [DEBUG] Building and walking apply graph for DestroyMode plan
+2022-04-17T11:06:05.814-0600 [DEBUG] Starting graph walk: walkDestroy

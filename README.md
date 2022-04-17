@@ -15,6 +15,7 @@ Also, This repository will create 3 workers, 3 master, and 3 etcd Kubernetes clu
 1. All steps will be conducted under Docker container for beginners.
 
    ```
+   # sudo chmod 666 /var/run/docker.sock
    # docker run -it --name terraform-aws-kube -h terraform-aws-kube ubuntu:16.04
    ```
 
@@ -26,12 +27,18 @@ Also, This repository will create 3 workers, 3 master, and 3 etcd Kubernetes clu
        cd aws-terraform-kubernetes/terraform
    ```
 
-3. Download terraform binary.
+3. Download terraform binary (amd64 | arm64).
 
    ```
    $ wget https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_amd64.zip && \
        unzip terraform_1.0.11_linux_amd64.zip && \
        rm terraform_1.0.11_linux_amd64.zip && \
+       mv terraform /usr/bin && chmod +x /usr/bin/terraform
+   ```
+   ```
+   $ wget https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_arm64.zip && \
+       unzip terraform_1.0.11_linux_arm64.zip && \
+       rm terraform_1.0.11_linux_arm64.zip && \
        mv terraform /usr/bin && chmod +x /usr/bin/terraform
    ```
 
@@ -46,13 +53,14 @@ Also, This repository will create 3 workers, 3 master, and 3 etcd Kubernetes clu
 
    ```
    $ terraform init && ssh-keygen -t rsa -N "" -f ../keys/tf-kube
+   $ terraform plan 
    ```
 
 6. Adjust the number of ```etcd```, ```worker```, and ```master``` nodes using **Step 2** as shown below.
 7. Create all objects in AWS. It will trigger to create VPC, Subnet, EC2 instances, etc.
 
    ```
-   $ terraform apply
+   $ terraform apply -auto-approve
    ```
 
 
@@ -117,7 +125,7 @@ First of all, edit `inventory_aws_ec2.yml` file to match your own configurations
    To check whether it works, use below ansible **ping** module
 
    ```
-   $ ansible --private-key ../keys/tf-kube -m ping all
+   $ ../ansible --private-key ../keys/tf-kube -m ping all
    ```
 
 3. Download kubespray. You can adjust proper version, but I used v2.18.1 kubespray :D
@@ -164,9 +172,15 @@ ec2-52-79-249-245.ap-northeast-2.compute.amazonaws.com    Ready    <none>       
 In terraform directory, use below command. It will destroy all objects, including EC2 Instances
 
 ```
-$ terraform destroy
+$ terraform destroy -auto-approve
 ```
 
+```
+Exit the docker container and kill it
+```
+$ exit
+$ docker images
+$ docker stop <name of container>
 ## Limitations
 
 - It assumes that **master** acts as an **etcd** node. It should be modified to separate **etcd** and **master** role.(solved)
