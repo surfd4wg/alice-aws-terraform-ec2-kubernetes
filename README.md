@@ -1,6 +1,6 @@
 ## Kubernetes Setup using AWS and Terraform
 
-<img src="https://github.com/surfd4wg/alice-aws-terraform-ce2-kubernetes/blob/master/pictures/kube.png?raw=true">
+<img src="https://github.com/surfd4wg/alice-aws-terraform-ec2-kubernetes/blob/main/pictures/kube.png?raw=true">
 
 This repository is copied from opencredo/k8s-terraform-ansible-sample and alicek106/aws-terraform-kubernetes
 
@@ -167,7 +167,7 @@ ec2-3-38-165-142.ap-northeast-2.compute.amazonaws.com     Ready    control-plane
 ec2-52-79-249-245.ap-northeast-2.compute.amazonaws.com    Ready    <none>                 4m13s   v1.22.8
 ```
 
-<p align="center"><img src="https://github.com/alicek106/aws-terraform-kubernetes/blob/master/pictures/kube2.png?raw=true" width="570" height="350"></p>
+<p align="center"><img src="https://github.com/surfd4wg/alice-aws-terraform-ec2-kubernetes/blob/main/pictures/kube2.png?raw=true" width="570" height="350"></p>
 
 ## Cleanup
 
