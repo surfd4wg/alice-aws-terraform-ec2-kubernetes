@@ -23,8 +23,8 @@ Also, This repository will create 3 workers, 3 master, and 3 etcd Kubernetes clu
 
    ```
    $ apt update && apt install git python python-pip unzip wget vim -y && \
-       git clone https://github.com/alicek106/aws-terraform-kubernetes.git && \
-       cd aws-terraform-kubernetes/terraform
+       git clone https://github.com/surfd4wg/alice-aws-terraform-ec2-kubernetes.git && \
+       cd alice-aws-terraform-ec2-kubernetes/terraform
    ```
 
 3. Download terraform binary (amd64 | arm64).
@@ -175,13 +175,13 @@ In terraform directory, use below command. It will destroy all objects, includin
 $ terraform destroy -auto-approve
 ```
 
-```
 Exit the docker container and kill it
 ```
 $ exit
-$ docker images
-$ docker stop <name of container>
-## Limitations
+$ docker ps -a
+$ docker stop <CONTAINER ID>
+$ docker rm <CONTAINER ID>
+```
 
 - It assumes that **master** acts as an **etcd** node. It should be modified to separate **etcd** and **master** role.(solved)
 - Health check of master node is impossible using https:6443 in ELB. (It is recommended to use another proxy such as nginx in Master Node for healthcheck. Health check proxy should be deployed by yourself :D)
