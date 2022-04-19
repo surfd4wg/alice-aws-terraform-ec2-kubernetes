@@ -7,7 +7,7 @@
   gather_facts: false # As Python is not yet installed, we cannot gather host facts
 
   tasks:
-    - name: Install Python
+    - name: Install Python3
       raw: "apt update && apt-get -y -q install python3 python3-pip"
       become: true
       retries: 10
