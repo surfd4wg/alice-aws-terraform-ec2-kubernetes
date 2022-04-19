@@ -202,11 +202,12 @@ In terraform directory, use below command. It will destroy all objects, includin
 $ terraform destroy -auto-approve
 ```
 ## If you get disconnected from the Docker Container
+```
 $ sudo chmod 666 /var/run/docker.sock
 $ docker ps -a
 $ docker container restart <container id>
 $ docker exec -it <container id> /bin/bash
-
+```
 ## Exiting and removing the Docker Container
 
 Exit the docker container and kill it
